@@ -1,95 +1,99 @@
-import * as React from 'react'
-import { Text, TextInput, Button, View, StyleSheet } from 'react-native'
-import { useSignUp } from '@clerk/clerk-expo'
-import { useRouter } from 'expo-router'
+import * as React from 'react';
+import { Text, TextInput, Button, View, StyleSheet, Image } from 'react-native';
+import { useSignUp } from '@clerk/clerk-expo';
+import { useRouter } from 'expo-router';
 
 export default function SignUpScreen() {
-  const { isLoaded, signUp, setActive } = useSignUp()
-  const router = useRouter()
+  const { isLoaded, signUp, setActive } = useSignUp();
+  const router = useRouter();
 
-  const [emailAddress, setEmailAddress] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const [pendingVerification, setPendingVerification] = React.useState(false)
-  const [code, setCode] = React.useState('')
+  const [emailAddress, setEmailAddress] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [pendingVerification, setPendingVerification] = React.useState(false);
+  const [code, setCode] = React.useState('');
 
-  // Handle submission of sign-up form
   const onSignUpPress = async () => {
-    if (!isLoaded) return
+    if (!isLoaded) return;
 
     try {
-      await signUp.create({ emailAddress, password })
-      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' })
-      setPendingVerification(true)
+      await signUp.create({ emailAddress, password });
+      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
+      setPendingVerification(true);
     } catch (err) {
-      console.error(JSON.stringify(err, null, 2))
+      console.error(JSON.stringify(err, null, 2));
     }
-  }
+  };
 
-  // Handle submission of verification form
   const onVerifyPress = async () => {
-    if (!isLoaded) return
+    if (!isLoaded) return;
 
     try {
-      const signUpAttempt = await signUp.attemptEmailAddressVerification({ code })
+      const signUpAttempt = await signUp.attemptEmailAddressVerification({ code });
       if (signUpAttempt.status === 'complete') {
-        await setActive({ session: signUpAttempt.createdSessionId })
-        router.replace('/')
+        await setActive({ session: signUpAttempt.createdSessionId });
+        router.replace('/');
       } else {
-        console.error(JSON.stringify(signUpAttempt, null, 2))
+        console.error(JSON.stringify(signUpAttempt, null, 2));
       }
     } catch (err) {
-      console.error(JSON.stringify(err, null, 2))
+      console.error(JSON.stringify(err, null, 2));
     }
-  }
+  };
 
   if (pendingVerification) {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Verify your email</Text>
+        <Image source={require("../../assets/images/icon.jpg")} style={styles.logo} />
+        <Text style={styles.title}>Verify Your Email</Text>
         <TextInput
           style={styles.input}
           value={code}
-          placeholder="Enter your verification code"
+          placeholder="Enter verification code"
           placeholderTextColor="#888"
-          onChangeText={(code) => setCode(code)}
+          onChangeText={setCode}
         />
-        <Button title="Verify" onPress={onVerifyPress} color="#00d684" />
+        <Button title="Verify" onPress={onVerifyPress} color="#e12c2b" />
       </View>
-    )
+    );
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
+      <Image source={require("../../assets/images/icon.jpg")} style={styles.logo} />
+      <Text style={styles.title}>Create Your Account</Text>
       <TextInput
         style={styles.input}
         autoCapitalize="none"
         value={emailAddress}
-        placeholder="Enter email"
+        placeholder="Email Address"
         placeholderTextColor="#888"
-        onChangeText={(email) => setEmailAddress(email)}
+        onChangeText={setEmailAddress}
       />
       <TextInput
         style={styles.input}
         value={password}
-        placeholder="Enter password"
+        placeholder="Password"
         placeholderTextColor="#888"
-        secureTextEntry={true}
-        onChangeText={(password) => setPassword(password)}
+        secureTextEntry
+        onChangeText={setPassword}
       />
-      <Button title="Continue" onPress={onSignUpPress} color="#00d684" />
+      <Button title="Sign Up" onPress={onSignUpPress} color="#e12c2b" />
     </View>
-  )
+  );
 }
 
-// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f3f9f5',
+    backgroundColor: '#fff',
     padding: 20,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
   },
   title: {
     fontSize: 24,
@@ -100,13 +104,12 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     height: 50,
-    backgroundColor: '#fff',
-    borderColor: '#00d684',
-    borderWidth: 2,
-    borderRadius: 10,
+    backgroundColor: '#f9f9f9',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 8,
     paddingHorizontal: 15,
     marginBottom: 15,
     fontSize: 16,
   },
-})
-
+});

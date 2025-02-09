@@ -1,50 +1,67 @@
-# Welcome to your Expo app 👋
+# JobSphere - Your Personalized Job Search Assistant 🚀
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Welcome to **JobSphere**, a modern, user-friendly React Native (Expo) application designed to revolutionize your job search experience. Whether you're a fresh graduate or a seasoned professional, JioSphere helps you find, apply, and track job opportunities effortlessly. With a sleek design, seamless navigation, and powerful features, JioSphere is your ultimate job search companion.
 
-## Get started
+---
 
-1. Install dependencies
+## Features ✨
 
+- **🔍 Tailored Job Listings**: Find job opportunities that match your skills and preferences.
+- **🔒 Secure Authentication**: Built with **Clerk** for seamless and secure user authentication.
+- **🚀 Smooth State Management**: Powered by **Zustand** for efficient and scalable state management.
+
+---
+
+## Demo 🎥
+
+Check out the live demo of JobSphere:  
+👉 [JioSphere Demo](https://drive.google.com/file/d/1vMRMEqs46lq_6ODAM_8pCK4oG6A66j7F/view?usp=sharing) 👈
+
+---
+
+## Tech Stack 💻
+
+- **Frontend**: React Native (Expo)
+- **State Management**: Zustand
+- **Authentication**: Clerk
+- **Styling**: React Native StyleSheet
+- **Navigation**: React Navigation
+
+---
+
+## Installation 🛠️
+
+Follow these steps to set up JioSphere on your local machine:
+
+1. **Clone the Repository**:
    ```bash
-   npm install
+   git clone https://github.com/khadar-oothuru/JobSphere
+   cd JobSphere
    ```
 
-2. Start the app
-
+2. **Install Dependencies**:
    ```bash
-    npx expo start
+   npm install  # or yarn install
    ```
 
-In the output, you'll find options to open the app in a
+3. **Start the Expo Development Server**:
+   ```bash
+   npx expo start  # or expo start
+   ```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+4. **Run on Emulator or Physical Device**:
+   - Scan the QR code with the Expo Go app (iOS/Android) or run on an emulator.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
 
-When you're ready, run:
 
-```bash
-npm run reset-project
-```
+## License 📜
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+JioSphere is open-source and available under the [MIT License](LICENSE). Feel free to use and modify it as needed.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+## Contact 📧
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+For any queries or feedback, reach out to us at [khadarbasha.o21@iiits.in](mailto:khadarbasha.o21@iiits.in).

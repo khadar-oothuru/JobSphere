@@ -1,35 +1,65 @@
-import { Image, StyleSheet } from 'react-native';
+import { useRef, useEffect } from 'react';
+import { Image, StyleSheet, Animated, TouchableOpacity, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useNavigation } from '@react-navigation/native';
+import { useColorScheme } from 'react-native';
+import { Colors } from '@/constants/Colors';
+
+// Custom Button Component
+const ThemedButton = ({ title, onPress }) => (
+  <TouchableOpacity style={styles.button} onPress={onPress}>
+    <ThemedText style={styles.buttonText}>{title}</ThemedText>
+  </TouchableOpacity>
+);
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const theme = useColorScheme() === 'dark' ? Colors.dark : Colors.light;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 800,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
   return (
-    <ThemedView style={styles.container}>
-      {/* Logo */}
-      <Image
-        source={require('@/assets/images/homepage.jpg')}
-        style={styles.logo}
-        resizeMode="contain"
-      />
+    <ThemedView style={[styles.container, { backgroundColor: theme.background }]}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Animated.View style={{ ...styles.animatedContainer, opacity: fadeAnim }}>
+          {/* Logo */}
+          <Image
+            source={require('@/assets/images/homepage.jpg')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
 
-      {/* Welcome Message */}
-      <ThemedText type="title" style={styles.title}>
-        Welcome to My Job Sphere 🚀
-      </ThemedText>
+          {/* Welcome Message */}
+          <ThemedText type="title" style={[styles.title, { color: theme.text }]}>
+            Welcome to My Job Sphere 🚀
+          </ThemedText>
 
-      {/* App Description */}
-      <ThemedText type="subtitle" style={styles.subtitle}>
-        Your personalized job search assistant. Get hired faster!
-      </ThemedText>
+          {/* App Description */}
+          <ThemedText type="subtitle" style={[styles.subtitle, { color: theme.text }]}>
+            Your personalized job search assistant. Get hired faster!
+          </ThemedText>
 
-      {/* Key Features */}
-      <ThemedView style={styles.features}>
-        <ThemedText style={styles.featureText}>🔍 Find job listings tailored to your skills</ThemedText>
-        <ThemedText style={styles.featureText}>📩 Apply with one tap</ThemedText>
-        <ThemedText style={styles.featureText}>📊 Track your applications in real time</ThemedText>
-        <ThemedText style={styles.featureText}>📬 Get job alerts for new openings</ThemedText>
-        <ThemedText style={styles.featureText}>📝 Save and edit your resume on the go</ThemedText>
-      </ThemedView>
+          {/* Key Features */}
+          <ThemedView style={[styles.features, { backgroundColor: theme.tint }]}>
+            <ThemedText style={[styles.featureText, { color: theme.text }]}>🔍 Find job listings tailored to your skills</ThemedText>
+            <ThemedText style={[styles.featureText, { color: theme.text }]}>📩 Apply with one tap</ThemedText>
+            <ThemedText style={[styles.featureText, { color: theme.text }]}>📊 Track your applications in real time</ThemedText>
+            <ThemedText style={[styles.featureText, { color: theme.text }]}>📬 Get job alerts for new openings</ThemedText>
+            <ThemedText style={[styles.featureText, { color: theme.text }]}>📝 Save and edit your resume on the go</ThemedText>
+          </ThemedView>
+
+          {/* Navigate to Jobs Page */}
+          <ThemedButton title="Explore Jobs" onPress={() => navigation.navigate('SearchJobs')} />
+        </Animated.View>
+      </ScrollView>
     </ThemedView>
   );
 }
@@ -37,40 +67,57 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 20,
+  },
+  scrollContainer: {
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#f3f9f5', // Light greenish background for a fresh look
+  },
+  animatedContainer: {
+    alignItems: 'center',
+    width: '100%',
+    maxWidth: 400,
   },
   logo: {
-    width: 180,
-    height: 180,
+    width: 200, // Adjusted for better visibility
+    height: 200,
     marginBottom: 20,
   },
   title: {
     fontSize: 26,
     fontWeight: 'bold',
-    color: '#2d6a4f', // Dark green for contrast
     marginBottom: 10,
   },
   subtitle: {
     fontSize: 18,
-    color: '#40916c', // Medium green
     marginBottom: 20,
     textAlign: 'center',
   },
   features: {
     alignItems: 'flex-start',
-    backgroundColor: '#d8f3dc', // Soft green background for features
     padding: 15,
     borderRadius: 10,
     width: '100%',
     maxWidth: 350,
     elevation: 3,
+    marginBottom: 20,
   },
   featureText: {
     fontSize: 16,
-    color: '#081c15', // Deep green for readability
     marginBottom: 6,
   },
-});
+  button: {
+    backgroundColor: '#e12c2b', // Updated button color
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    elevation: 3,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff', // Ensuring white text
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+})

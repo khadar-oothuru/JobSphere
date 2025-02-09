@@ -26,4 +26,4 @@ const createTokenCache = (): TokenCache => {
 }
 
 // SecureStore is not supported on the web
-export const tokenCache = Platform.OS !== 'web' ? createTokenCache() : undefined
+export  const tokenCache = Platform.OS !== 'web' ? createTokenCache() : undefined

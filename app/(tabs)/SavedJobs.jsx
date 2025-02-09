@@ -1,33 +1,26 @@
+import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
-
+import useStore from "../../store/store"
 const SavedJobs = () => {
-  const [savedJobs, setSavedJobs] = useState([
-    { id: '1', title: 'Frontend Developer', company: 'Google' },
-    { id: '2', title: 'React Native Developer', company: 'Meta' },
-    { id: '3', title: 'Backend Developer', company: 'Amazon' },
-  ]);
-
-  const removeJob = (id) => {
-    setSavedJobs(savedJobs.filter((job) => job.id !== id));
-  };
+  const { bookmarkedJobs, toggleBookmark } = useStore();
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Saved Jobs</Text>
-      {savedJobs.length > 0 ? (
+      {bookmarkedJobs.length > 0 ? (
         <FlatList
-          data={savedJobs}
-          keyExtractor={(item) => item.id}
+          data={bookmarkedJobs}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View style={styles.jobCard}>
               <Text style={styles.jobTitle}>{item.title}</Text>
-              <Text style={styles.company}>{item.company}</Text>
-              <TouchableOpacity onPress={() => removeJob(item.id)} style={styles.removeButton}>
+              <Text style={styles.company}>{item.company_name}</Text>
+              <TouchableOpacity onPress={() => toggleBookmark(item)} style={styles.removeButton}>
                 <Text style={styles.removeText}>Remove</Text>
               </TouchableOpacity>
             </View>
           )}
+          contentContainerStyle={{ paddingBottom: 80 }} // Extra space for bottom UI
         />
       ) : (
         <Text style={styles.noJobs}>No saved jobs yet.</Text>
@@ -64,7 +57,7 @@ const styles = StyleSheet.create({
   },
   removeButton: {
     marginTop: 8,
-    backgroundColor: 'red',
+    backgroundColor: '#e12c2b',
     padding: 6,
     borderRadius: 5,
     alignSelf: 'flex-start',
