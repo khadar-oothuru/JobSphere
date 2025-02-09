@@ -15,7 +15,7 @@ Welcome to **JobSphere**, a modern, user-friendly React Native (Expo) applicatio
 ## Demo 🎥
 
 Check out the live demo of JobSphere:  
-👉 [JioSphere Demo](https://drive.google.com/file/d/1vMRMEqs46lq_6ODAM_8pCK4oG6A66j7F/view?usp=sharing) 👈
+👉 [JobSphere Demo](https://drive.google.com/file/d/1vMRMEqs46lq_6ODAM_8pCK4oG6A66j7F/view?usp=sharing) 👈
 
 ---
 
