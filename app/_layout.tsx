@@ -49,24 +49,26 @@ function AuthenticatedApp({ colorScheme }) {
     }
   }, [isSignedIn, isLoaded]);
 
-  if (!isLoaded) return null; // Prevents flickering while Clerk is loading
+  if (!isLoaded) return null; 
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <StatusBar style="auto" />
 
-      {/* 🔥 Dynamically Render Navigation Based on Authentication */}
       {isSignedIn ? (
-        // Protected Routes (Only for Signed-In Users)
+     
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="+not-found" />
         </Stack>
       ) : (
-        // Public Routes (Only for Signed-Out Users)
+      
         <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(auth)/sign-in" />
-          <Stack.Screen name="(auth)/sign-up" />
+      
+       <Stack.Screen name="(auth)" />
+       {/* <Stack.Screen name="(auth)/sign-up" /> */}
+
+          
         </Stack>
       )}
     </ThemeProvider>

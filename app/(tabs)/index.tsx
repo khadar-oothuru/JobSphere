@@ -42,12 +42,12 @@ export default function HomeScreen() {
             Welcome to My Job Sphere 🚀
           </ThemedText>
 
-          {/* App Description */}
+       
           <ThemedText type="subtitle" style={[styles.subtitle, { color: theme.text }]}>
             Your personalized job search assistant. Get hired faster!
           </ThemedText>
 
-          {/* Key Features */}
+      
           <ThemedView style={[styles.features, { backgroundColor: theme.tint }]}>
             <ThemedText style={[styles.featureText, { color: theme.text }]}>🔍 Find job listings tailored to your skills</ThemedText>
             <ThemedText style={[styles.featureText, { color: theme.text }]}>📩 Apply with one tap</ThemedText>
@@ -56,7 +56,7 @@ export default function HomeScreen() {
             <ThemedText style={[styles.featureText, { color: theme.text }]}>📝 Save and edit your resume on the go</ThemedText>
           </ThemedView>
 
-          {/* Navigate to Jobs Page */}
+          
           <ThemedButton title="Explore Jobs" onPress={() => navigation.navigate('SearchJobs')} />
         </Animated.View>
       </ScrollView>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: '#fff', // Ensuring white text
+    color: '#fff', 
     fontWeight: 'bold',
     textAlign: 'center',
   },
